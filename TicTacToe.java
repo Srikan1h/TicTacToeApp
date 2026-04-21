@@ -2,6 +2,14 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class TicTacToe {
+
+    // UC5: Board initialization
+    static char[][] board = {
+        {'-', '-', '-'},
+        {'-', '-', '-'},
+        {'-', '-', '-'}
+    };
+
     public static void main(String[] args) {
 
         String player1 = "Player 1";
@@ -42,6 +50,13 @@ public class TicTacToe {
         int col = getColFromSlot(slot);
 
         System.out.println("Mapped Position -> Row: " + row + ", Column: " + col);
+
+        // UC5: Validate move
+        if (isValidMove(row, col)) {
+            System.out.println("Move is valid ✅");
+        } else {
+            System.out.println("Invalid move ❌");
+        }
     }
 
     // UC3
@@ -58,5 +73,17 @@ public class TicTacToe {
 
     static int getColFromSlot(int slot) {
         return (slot - 1) % 3;
+    }
+
+    // UC5
+    static boolean isValidMove(int row, int col) {
+
+        // Boundary check
+        if (row < 0 || row > 2 || col < 0 || col > 2) {
+            return false;
+        }
+
+        // Check if cell is empty
+        return board[row][col] == '-';
     }
 }
